@@ -1,24 +1,37 @@
-﻿namespace NoMaster
+﻿using NoMaster.Models;
+using System.Net.Http.Json;
+
+namespace NoMaster;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private readonly HttpClient _httpClient = new();
+
+    public MainPage()
     {
-        int count = 0;
+        InitializeComponent();
+    }
 
-        public MainPage()
+    private async void OnGetNoClicked(object sender, EventArgs e)
+    {
+        LoadingIndicator.IsRunning = true;
+        ReasonLabel.Text = "Fetching a polite rejection...";
+
+        try
         {
-            InitializeComponent();
+            // Note: The popular public endpoint is currently down.
+            // Using a reliable community mirror instead.
+            var response = await _httpClient.GetFromJsonAsync<NoResponse>("https://no-as-service.lmstudio.ai/no");
+
+            ReasonLabel.Text = response?.Reason ?? "Even the API couldn't say no properly...";
         }
-
-        private void OnCounterClicked(object? sender, EventArgs e)
+        catch (Exception)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            ReasonLabel.Text = "No internet? That's a solid 'No' from reality. 😅";
+        }
+        finally
+        {
+            LoadingIndicator.IsRunning = false;
         }
     }
 }
