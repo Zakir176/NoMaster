@@ -29,6 +29,8 @@
                     StrokeShape="RoundRectangle 20"
                     Padding="30"
                     MinimumHeightRequest="200">
+
+                <!-- Shadow on the Border itself -->
                 <Border.Shadow>
                     <Shadow Brush="Black"
                             Offset="5,10"
@@ -36,6 +38,7 @@
                             Opacity="0.8" />
                 </Border.Shadow>
 
+                <!-- The single child content: the Label with the reason -->
                 <Label x:Name="ReasonLabel"
                        Text="Tap below to get a creative 'No'!"
                        FontSize="28"
@@ -62,6 +65,8 @@
                     HeightRequest="80"
                     WidthRequest="300"
                     Clicked="OnGetNoClicked">
+
+                <!-- Shadow on the Button -->
                 <Button.Shadow>
                     <Shadow Brush="#80000000"
                             Offset="5,10"
