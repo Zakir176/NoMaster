@@ -2,49 +2,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NoMaster.MainPage"
-             BackgroundColor="#f8f9fa">
+             BackgroundColor="#121212">
 
-    <VerticalStackLayout Spacing="30"
-                         Padding="30"
-                         VerticalOptions="Center"
-                         HorizontalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout Spacing="40"
+                             Padding="30"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
 
-        <Label Text="NoMaster"
-               FontSize="40"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               TextColor="#343a40" />
+            <!-- Title -->
+            <Label Text="NoMaster"
+                   FontSize="48"
+                   FontAttributes="Bold"
+                   TextColor="#FF6B6B"
+                   HorizontalOptions="Center" />
 
-        <Label Text="Powered by No-as-a-Service 😏"
-               FontSize="18"
-               HorizontalOptions="Center"
-               TextColor="#6c757d" />
+            <Label Text="Powered by No-as-a-Service 😏"
+                   FontSize="20"
+                   TextColor="#B0B0B0"
+                   HorizontalOptions="Center" />
 
-        <Frame BackgroundColor="White"
-               Padding="20"
-               CornerRadius="15"
-               HasShadow="True"
-               MinimumHeightRequest="150">
-            <Label x:Name="ReasonLabel"
-                   Text="Tap the button to get a creative 'No'!"
-                   FontSize="24"
-                   TextColor="#212529"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center" />
-        </Frame>
+            <!-- Quote-style reason display -->
+            <Border BackgroundColor="#1E1E1E"
+                    Stroke="#333333"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 20"
+                    Padding="30"
+                    MinimumHeightRequest="200">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="5,10"
+                            Radius="20"
+                            Opacity="0.8" />
+                </Border.Shadow>
 
-        <ActivityIndicator x:Name="LoadingIndicator"
-                           Color="#007bff"
-                           IsRunning="False" />
+                <Label x:Name="ReasonLabel"
+                       Text="Tap below to get a creative 'No'!"
+                       FontSize="28"
+                       TextColor="White"
+                       FontAttributes="Italic"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       LineBreakMode="WordWrap" />
+            </Border>
 
-        <Button Text="Get a No!"
-                FontSize="24"
-                BackgroundColor="#dc3545"
-                TextColor="White"
-                CornerRadius="10"
-                HeightRequest="70"
-                Clicked="OnGetNoClicked" />
+            <!-- Loading spinner -->
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               Color="#FF6B6B"
+                               IsRunning="False"
+                               HeightRequest="50" />
 
-    </VerticalStackLayout>
+            <!-- Big fun button -->
+            <Button Text="Get a No!"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    BackgroundColor="#FF6B6B"
+                    TextColor="White"
+                    CornerRadius="30"
+                    HeightRequest="80"
+                    WidthRequest="300"
+                    Clicked="OnGetNoClicked">
+                <Button.Shadow>
+                    <Shadow Brush="#80000000"
+                            Offset="5,10"
+                            Radius="20"
+                            Opacity="0.8" />
+                </Button.Shadow>
+            </Button>
 
+            <!-- Footer -->
+            <Label Text="Built with .NET MAUI ❤️"
+                   FontSize="16"
+                   TextColor="#666666"
+                   HorizontalOptions="Center"
+                   Margin="0,40,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

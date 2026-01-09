@@ -19,15 +19,15 @@ public partial class MainPage : ContentPage
 
         try
         {
-            // Note: The popular public endpoint is currently down.
-            // Using a reliable community mirror instead.
-            var response = await _httpClient.GetFromJsonAsync<NoResponse>("https://no-as-service.lmstudio.ai/no");
+            // Simple anti-cache trick: add a unique query param
+            var url = $"https://naas.isalman.dev/no?t={DateTime.Now.Ticks}";
+            var noResponse = await _httpClient.GetFromJsonAsync<NoResponse>(url);
 
-            ReasonLabel.Text = response?.Reason ?? "Even the API couldn't say no properly...";
+            ReasonLabel.Text = noResponse?.Reason ?? "The API is feeling shy today...";
         }
         catch (Exception)
         {
-            ReasonLabel.Text = "No internet? That's a solid 'No' from reality. 😅";
+            ReasonLabel.Text = "No internet? That's a hard 'No' from the universe. 😅";
         }
         finally
         {
